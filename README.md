@@ -1,4 +1,4 @@
 #Curso-Django
 
-Aplicação disponível em https://github.com/MarqueaneSouza/Curso-Django (informar endereço do app no heroku)
+Aplicação disponível em https://cursodjango2022.herokuapp.com/
 
