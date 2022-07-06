@@ -15,6 +15,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv sync -d
+          cp contrib/env-sample .env
       - name: flake8
         run:  pipenv run flake8
       - name: test
