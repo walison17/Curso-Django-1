@@ -4,6 +4,15 @@ on: [ push ]
 jobs:
   build:
     runs-on: ubuntu-latest
+    #configurando  psycopg2-binary #modelo do fórum
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: [ '5432:5432' ]
 
     steps:
       - uses: actions/checkout@v3
