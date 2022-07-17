@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.utils.timezone
 import pypro.base.models
-
+#---------------------------------------------
 
 class Migration(migrations.Migration):
     initial = True
