@@ -153,11 +153,13 @@ if AWS_ACCESS_KEY_ID:
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
     AWS_PRELOAD_METADATA = True
-    AWS_AUTO_CREATE_BUCKET = False
-    AWS_QUERYSTRING_AUTH = True
-    AWS_S3_CUSTOM_DOMAIN = None
-    AWS_DEFAULT_ACL = 'private'
-    COLLECTFAST_ENABLED = False  # colocar collectfast local false
+    AWS_AUTO_CREATE_BUCKET = False  # não criaremos bucket automático
+    AWS_QUERYSTRING_AUTH = True  # true para gerar url assinada
+    AWS_S3_CUSTOM_DOMAIN = None  # pois utilizaremos o proprio dominio do S3
+    AWS_DEFAULT_ACL = 'private'  # para os arquivos do S3 nao ficarem públicos
+
+    COLLECTFAST_ENABLED = True
+    COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
     # Static Assets
     # ----------------------------------------------------------------------------
@@ -166,8 +168,6 @@ if AWS_ACCESS_KEY_ID:
     STATIC_ROOT = f'/{STATIC_S3_PATH}/'
     STATIC_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
-    COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
     # Upload Media Folder
     DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
