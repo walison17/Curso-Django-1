@@ -130,8 +130,8 @@ USE_TZ = True
 
 # Configuração de ambiente de desenvolvimento
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'  # endereço base dos arquivos estáticos
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # diretório que colocarei meus arquivos estáticos
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -153,21 +153,21 @@ if AWS_ACCESS_KEY_ID:
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
     AWS_PRELOAD_METADATA = True
-    AWS_AUTO_CREATE_BUCKET = False  # não criaremos bucket automático
-    AWS_QUERYSTRING_AUTH = True  # true para gerar url assinada
+    AWS_AUTO_CREATE_BUCKET = False  # não criaremos buckets automáticos
+    AWS_QUERYSTRING_AUTH = True  # true para gerar urls assinadas
     AWS_S3_CUSTOM_DOMAIN = None  # pois utilizaremos o proprio dominio do S3
-    AWS_DEFAULT_ACL = 'private'  # para os arquivos do S3 nao ficarem públicos
+    AWS_DEFAULT_ACL = 'private'  # para que os arquivos do S3 nao fiquem públicos
 
     COLLECTFAST_ENABLED = True
     COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
     # Static Assets
     # ----------------------------------------------------------------------------
-    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
-    STATIC_S3_PATH = 'static'
-    STATIC_ROOT = f'/{STATIC_S3_PATH}/'
-    STATIC_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'
-    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'  # fará a gestão da pasta static
+    STATIC_S3_PATH = 'static'  # path padrão dos arquivos estáticos
+    STATIC_ROOT = f'/{STATIC_S3_PATH}/'  # reescreve STATIC_ROOT definido lá em cima
+    STATIC_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'  # aponta para o S3
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'  # adiciona o prefixo 'admin' para os arquivos estáticos do admin
 
     # Upload Media Folder
     DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
